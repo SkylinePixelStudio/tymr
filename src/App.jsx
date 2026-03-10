@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 
 const REGISTER_URL = "https://docs.google.com/forms/d/e/1FAIpQLSer19EGyzUkcciNvr0bLgCv1YV104nFslyncd6N-SPAkbmxHQ/viewform?usp=header";
 const PAYMENT_URL = "https://pmny.in/xJuAmT6XgxX7";
