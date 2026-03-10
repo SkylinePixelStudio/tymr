@@ -194,8 +194,8 @@ function LandingPage({ onEnter }) {
             <div style={{ fontWeight:700, marginBottom:12 }}>Contact Us</div>
             <div style={{ color:"#94a3b8", fontSize:14, lineHeight:2 }}>
               📞 +91 97908 18436<br/>
-              ✉️ acadcoachingcenter@gmail.com<br/>
-              📍 DABC, MAMBAKKAM, (NEAR VIT CHENNAI), Chennai, Tamil Nadu, India
+              ✉️ support@tymr.in<br/>
+              📍 Chennai, Tamil Nadu, India
             </div>
           </div>
           <div>
@@ -224,7 +224,7 @@ export default function App() {
   // Timetable state
   const [subjects, setSubjects] = useState([]);
   const [csvError, setCsvError] = useState("");
-  const [config, setConfig] = useState({ days: ["Monday","Tuesday","Wednesday","Thursday","Friday"], start:"08:30", end:"16:00", period:55, teaAfter:2, lunchAfter:2, includeSat:false, teaStart:"10:20", teaEnd:"10:40", lunchStart:"12:30", lunchEnd:"13:15" });
+  const [config, setConfig] = useState({ days: ["Monday","Tuesday","Wednesday","Thursday","Friday"], start:"08:30", end:"16:00", period:50, teaAfter:2, lunchAfter:2, includeSat:false, teaStart:"10:20", teaEnd:"10:40", lunchStart:"12:30", lunchEnd:"13:15" });
   const [timetable, setTimetable] = useState(null);
   const [generated, setGenerated] = useState(false);
 
