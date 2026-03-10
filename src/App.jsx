@@ -114,7 +114,7 @@ function LandingPage({ onEnter }) {
     <div style={{ fontFamily: "'Segoe UI',sans-serif", background: "#0f0c29", minHeight: "100vh", color: "#fff" }}>
       {/* Hero */}
       <div style={{ background: "linear-gradient(135deg,#0f0c29,#302b63,#24243e)", padding: "0 20px 60px" }}>
-        <nav style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"20px 40px", borderBottom:"1px solid rgba(255,255,255,0.1)" }}>
+        <nav style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"20px 40px", borderBottom:"1px solid rgba(255,255,255,0.1)", position:"relative", zIndex:1 }}>
           <img src="/logo.png" alt="Tymr" style={{ height:40, width:40, borderRadius:8, objectFit:"cover" }} />
           <div style={{ display:"flex", gap:10 }}>
             <a href={REGISTER_URL} target="_blank" rel="noreferrer" style={{ background:"transparent", color:"#a5b4fc", border:"1px solid #6366f1", borderRadius:8, padding:"10px 20px", cursor:"pointer", fontWeight:600, textDecoration:"none", fontSize:14 }}>Register</a>
@@ -163,9 +163,9 @@ function LandingPage({ onEnter }) {
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))", gap:20, maxWidth:960, margin:"0 auto" }}>
           {[
             { name:"Free Trial", price:"₹0", period:"/14 days", color:"#64748b", features:["5 timetables","Basic attendance","2 exam schedules","Email support"] },
-            { name:"Starter", price:"₹99", period:"/month", color:"#0ea5e9", features:["Unlimited timetables","Advanced attendance","10 exam schedules","Priority email","5 users","CSV/PDF export"] },
-            { name:"Professional", price:"₹299", period:"/month", color:"#6366f1", popular:true, features:["Everything in Starter","Unlimited exams","Advanced seating","20 users","Custom branding","Analytics & reports","API access","Phone support"] },
-            { name:"Enterprise", price:"₹499", period:"/month", color:"#8b5cf6", features:["Everything in Pro","Unlimited users","Dedicated manager","Custom integrations","On-premise option","24/7 support","Training"] },
+            { name:"Starter", price:"₹29", period:"/month", color:"#0ea5e9", features:["Unlimited timetables","Advanced attendance","10 exam schedules","Priority email","5 users","CSV/PDF export"] },
+            { name:"Professional", price:"₹49", period:"/month", color:"#6366f1", popular:true, features:["Everything in Starter","Unlimited exams","Advanced seating","20 users","Custom branding","Analytics & reports","API access","Phone support"] },
+            { name:"Enterprise", price:"₹99", period:"/month", color:"#8b5cf6", features:["Everything in Pro","Unlimited users","Dedicated manager","Custom integrations","On-premise option","24/7 support","Training"] },
           ].map(p => (
             <div key={p.name} style={{ background: p.popular ? "linear-gradient(135deg,rgba(99,102,241,0.2),rgba(139,92,246,0.2))" : "rgba(255,255,255,0.04)", border:`2px solid ${p.popular ? "#6366f1" : "rgba(255,255,255,0.08)"}`, borderRadius:16, padding:24, position:"relative" }}>
               {p.popular && <div style={{ position:"absolute", top:-12, left:"50%", transform:"translateX(-50%)", background:"linear-gradient(135deg,#6366f1,#8b5cf6)", borderRadius:20, padding:"4px 14px", fontSize:12, fontWeight:700 }}>⭐ Most Popular</div>}
