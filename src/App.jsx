@@ -88,7 +88,7 @@ function LandingPage({onEnter,darkMode}){
     <div style={{fontFamily:"'Segoe UI',sans-serif",background:bg,minHeight:"100vh",color:text}}>
       <div style={{minHeight:"100vh",position:"relative",overflow:"hidden",display:"flex",flexDirection:"column",padding:"0 20px 60px"}}>
         <img src="/campus.jpg" alt="" style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",zIndex:0}}/>
-        <div style={{position:"absolute",inset:0,background:darkMode?"linear-gradient(135deg,rgba(15,12,41,0.92),rgba(48,43,99,0.88),rgba(36,36,62,0.92))":"linear-gradient(135deg,rgba(15,12,41,0.82),rgba(48,43,99,0.78),rgba(36,36,62,0.82))",zIndex:1}}/>
+        <div style={{position:"absolute",inset:0,background:darkMode?"linear-gradient(135deg,rgba(15,12,41,0.72),rgba(48,43,99,0.65),rgba(36,36,62,0.72))":"linear-gradient(135deg,rgba(15,12,41,0.65),rgba(48,43,99,0.58),rgba(36,36,62,0.65))",zIndex:1}}/>
         <div style={{position:"absolute",width:600,height:600,borderRadius:"50%",background:"rgba(99,102,241,0.06)",top:-200,right:-200,zIndex:1}}/>
         <div style={{position:"absolute",width:400,height:400,borderRadius:"50%",background:"rgba(139,92,246,0.06)",bottom:-100,left:-100,zIndex:1}}/>
         <nav style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"20px 40px",borderBottom:"1px solid rgba(255,255,255,0.1)",position:"relative",zIndex:2}}>
