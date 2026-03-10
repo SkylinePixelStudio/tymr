@@ -1,21 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
-
-// Supabase client - works in local project with @supabase/supabase-js installed
-const SUPABASE_URL = "https://atqwdzanlfvxkzlmxtsz.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0cXdkemFubGZ2eGt6bG14dHN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMDc5ODAsImV4cCI6MjA4ODY4Mzk4MH0.eVpTMbk2G-CoZmSa4YAEl5MagTQB_JlYvA5zA05OA1M";
-
-// This import works in your local Vite project
-// import { createClient } from "@supabase/supabase-js";
-// const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-
 import { createClient } from "@supabase/supabase-js";
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-```
-
-**Step 4: Save and test**
-```
-http://localhost:5173/
-
+const supabase = createClient("https://atqwdzanlfvxkzlmxtsz.supabase.co","eyJhbGci...");
 const PAYMENT_URL = "https://pmny.in/xJuAmT6XgxX7";
 const TRIAL_LIMIT = 2;
 const COLORS = ["#6366f1","#0ea5e9","#10b981","#f59e0b","#ef4444","#8b5cf6","#ec4899","#14b8a6","#f97316","#84cc16"];
