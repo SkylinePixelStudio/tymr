@@ -194,8 +194,8 @@ function LandingPage({ onEnter }) {
             <div style={{ fontWeight:700, marginBottom:12 }}>Contact Us</div>
             <div style={{ color:"#94a3b8", fontSize:14, lineHeight:2 }}>
               📞 +91 97908 18436<br/>
-              ✉️ support@tymr.in<br/>
-              📍 Chennai, Tamil Nadu, India
+              ✉️ acadcoachingcenter@gmail.com<br/>
+              📍 DABC, MAMBAKKAM, (NEAR VIT CHENNAI), Chennai, Tamil Nadu, India
             </div>
           </div>
           <div>
