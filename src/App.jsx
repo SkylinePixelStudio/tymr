@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 const DAYS_ALL = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const REGISTER_URL = "https://docs.google.com/forms/d/e/1FAIpQLSer19EGyzUkcciNvr0bLgCv1YV104nFslyncd6N-SPAkbmxHQ/viewform?usp=header";
 const COLORS = ["#6366f1","#0ea5e9","#10b981","#f59e0b","#ef4444","#8b5cf6","#ec4899","#14b8a6","#f97316","#84cc16"];
 
 function parseTime(t) {
@@ -114,8 +115,11 @@ function LandingPage({ onEnter }) {
       {/* Hero */}
       <div style={{ background: "linear-gradient(135deg,#0f0c29,#302b63,#24243e)", padding: "0 20px 60px" }}>
         <nav style={{ display:"flex", justifyContent:"space-between", alignItems:"center", padding:"20px 40px", borderBottom:"1px solid rgba(255,255,255,0.1)" }}>
-          <div style={{ fontSize:28, fontWeight:800, background:"linear-gradient(90deg,#818cf8,#c084fc)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>Tymr</div>
-          <button onClick={onEnter} style={{ background:"linear-gradient(135deg,#6366f1,#8b5cf6)", color:"#fff", border:"none", borderRadius:8, padding:"10px 24px", cursor:"pointer", fontWeight:600 }}>Launch App →</button>
+          <img src="/logo.png" alt="Tymr" style={{ height:40, width:40, borderRadius:8, objectFit:"cover" }} />
+          <div style={{ display:"flex", gap:10 }}>
+            <a href={REGISTER_URL} target="_blank" rel="noreferrer" style={{ background:"transparent", color:"#a5b4fc", border:"1px solid #6366f1", borderRadius:8, padding:"10px 20px", cursor:"pointer", fontWeight:600, textDecoration:"none", fontSize:14 }}>Register</a>
+            <button onClick={onEnter} style={{ background:"linear-gradient(135deg,#6366f1,#8b5cf6)", color:"#fff", border:"none", borderRadius:8, padding:"10px 24px", cursor:"pointer", fontWeight:600 }}>Launch App →</button>
+          </div>
         </nav>
         <div style={{ textAlign:"center", padding:"80px 20px 40px" }}>
           <div style={{ display:"inline-block", background:"rgba(99,102,241,0.15)", border:"1px solid rgba(99,102,241,0.3)", borderRadius:20, padding:"6px 16px", fontSize:13, marginBottom:20, color:"#a5b4fc" }}>🎓 Smart Academic Scheduling</div>
@@ -124,7 +128,10 @@ function LandingPage({ onEnter }) {
             <span style={{ background:"linear-gradient(90deg,#818cf8,#c084fc,#f472b6)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>Timetables Instantly</span>
           </h1>
           <p style={{ color:"#94a3b8", fontSize:18, maxWidth:520, margin:"0 auto 40px" }}>Upload your faculty & subject CSV, configure your schedule, and generate a professional timetable in seconds.</p>
-          <button onClick={onEnter} style={{ background:"linear-gradient(135deg,#6366f1,#8b5cf6)", color:"#fff", border:"none", borderRadius:12, padding:"16px 40px", fontSize:18, fontWeight:700, cursor:"pointer", boxShadow:"0 0 40px rgba(99,102,241,0.4)" }}>Get Started Free →</button>
+          <div style={{ display:"flex", gap:12, justifyContent:"center" }}>
+            <a href={REGISTER_URL} target="_blank" rel="noreferrer" style={{ background:"transparent", color:"#a5b4fc", border:"2px solid #6366f1", borderRadius:12, padding:"16px 32px", fontSize:18, fontWeight:700, textDecoration:"none" }}>Register Free →</a>
+            <button onClick={onEnter} style={{ background:"linear-gradient(135deg,#6366f1,#8b5cf6)", color:"#fff", border:"none", borderRadius:12, padding:"16px 40px", fontSize:18, fontWeight:700, cursor:"pointer", boxShadow:"0 0 40px rgba(99,102,241,0.4)" }}>Launch App →</button>
+          </div>
         </div>
       </div>
 
@@ -167,7 +174,7 @@ function LandingPage({ onEnter }) {
               <ul style={{ listStyle:"none", padding:0, margin:"16px 0", color:"#94a3b8", fontSize:14 }}>
                 {p.features.map(f => <li key={f} style={{ padding:"4px 0" }}>✓ {f}</li>)}
               </ul>
-              <a href="https://pmny.in/xJuAmT6XgxX7" target="_blank" rel="noreferrer" style={{ display:"block", textAlign:"center", background:`linear-gradient(135deg,${p.color},${p.color}aa)`, color:"#fff", borderRadius:8, padding:"10px", textDecoration:"none", fontWeight:600, fontSize:14 }}>{p.price==="₹0"?"Get Started":"Subscribe Now"}</a>
+              <a href={REGISTER_URL} target="_blank" rel="noreferrer" style={{ display:"block", textAlign:"center", background:`linear-gradient(135deg,${p.color},${p.color}aa)`, color:"#fff", borderRadius:8, padding:"10px", textDecoration:"none", fontWeight:600, fontSize:14 }}>{p.price==="₹0"?"Register Free":"Subscribe Now"}</a>
             </div>
           ))}
         </div>
@@ -177,7 +184,10 @@ function LandingPage({ onEnter }) {
       <footer style={{ background:"#020617", padding:"40px 20px", borderTop:"1px solid rgba(255,255,255,0.06)" }}>
         <div style={{ maxWidth:960, margin:"0 auto", display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))", gap:32 }}>
           <div>
-            <div style={{ fontSize:24, fontWeight:800, background:"linear-gradient(90deg,#818cf8,#c084fc)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", marginBottom:12 }}>Tymr</div>
+              <div style={{ display:"flex", alignItems:"center", gap:12, marginBottom:12 }}>
+              <img src="/logo.png" alt="Tymr" style={{ height:48, width:48, borderRadius:10, objectFit:"cover" }} />
+              <div style={{ fontSize:24, fontWeight:800, background:"linear-gradient(90deg,#818cf8,#c084fc)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>Tymr</div>
+            </div>
             <p style={{ color:"#64748b", fontSize:14 }}>Smart academic scheduling for modern institutions.</p>
           </div>
           <div>
@@ -320,7 +330,10 @@ export default function App() {
     <div style={{ fontFamily:"'Segoe UI',sans-serif", minHeight:"100vh", background:"#0f172a", color:"#e2e8f0", display:"flex" }}>
       {/* Sidebar */}
       <aside style={{ width:220, background:"#1e293b", borderRight:"1px solid #334155", padding:"24px 0", display:"flex", flexDirection:"column", flexShrink:0 }}>
-        <div onClick={() => setPage("landing")} style={{ fontSize:24, fontWeight:800, background:"linear-gradient(90deg,#818cf8,#c084fc)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", padding:"0 20px 24px", cursor:"pointer" }}>Tymr</div>
+        <div onClick={() => setPage("landing")} style={{ padding:"0 20px 24px", cursor:"pointer", display:"flex", alignItems:"center", gap:10 }}>
+          <img src="/logo.png" alt="Tymr" style={{ height:36, width:36, borderRadius:8, objectFit:"cover" }} />
+          <span style={{ fontSize:20, fontWeight:800, background:"linear-gradient(90deg,#818cf8,#c084fc)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>Tymr</span>
+        </div>
         {navItems.map(n => (
           <div key={n.id} onClick={() => setTab(n.id)} style={{ padding:"12px 20px", cursor:"pointer", background: tab===n.id ? "rgba(99,102,241,0.15)" : "transparent", borderLeft: tab===n.id ? "3px solid #6366f1" : "3px solid transparent", color: tab===n.id ? "#818cf8" : "#94a3b8", fontWeight: tab===n.id ? 600 : 400 }}>{n.label}</div>
         ))}
