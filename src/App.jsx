@@ -217,7 +217,6 @@ function LandingPage({ onEnter }) {
 export default function App() {
   const [page, setPage] = useState("landing");
   const [tab, setTab] = useState("timetable");
-  const [showRegPopup, setShowRegPopup] = useState(false);
 
   // Timetable state
   const [subjects, setSubjects] = useState([]);
@@ -318,29 +317,7 @@ export default function App() {
     setExamForm({ title:"", date:"", time:"09:00", duration:3, hall:"Hall A", rows:10, cols:10, seating:"alternate" });
   }
 
-  if (page === "landing") return (
-    <>
-      <LandingPage onEnter={() => setShowRegPopup(true)} />
-      {showRegPopup && (
-        <div style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.7)", zIndex:1000, display:"flex", alignItems:"center", justifyContent:"center" }}>
-          <div style={{ background:"#1e293b", border:"1px solid #334155", borderRadius:20, padding:36, maxWidth:420, width:"90%", textAlign:"center" }}>
-            <div style={{ fontSize:40, marginBottom:12 }}>👋</div>
-            <h2 style={{ fontWeight:800, fontSize:22, marginBottom:8, color:"#e2e8f0" }}>Before you begin!</h2>
-            <p style={{ color:"#94a3b8", fontSize:14, marginBottom:24 }}>Register for free to help us personalise your experience and keep you updated with new features.</p>
-            <a href={REGISTER_URL} target="_blank" rel="noreferrer"
-              onClick={() => { setShowRegPopup(false); setPage("app"); }}
-              style={{ display:"block", background:"linear-gradient(135deg,#6366f1,#8b5cf6)", color:"#fff", borderRadius:10, padding:"14px", textDecoration:"none", fontWeight:700, fontSize:16, marginBottom:12 }}>
-              📝 Register Now (Free)
-            </a>
-            <button onClick={() => { setShowRegPopup(false); setPage("app"); }}
-              style={{ background:"transparent", color:"#64748b", border:"1px solid #334155", borderRadius:10, padding:"12px", width:"100%", cursor:"pointer", fontSize:14 }}>
-              Skip for now →
-            </button>
-          </div>
-        </div>
-      )}
-    </>
-  );
+  if (page === "landing") return <LandingPage onEnter={() => setPage("app")} />;
 
   // ── App Shell ──
   const navItems = [
