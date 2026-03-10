@@ -1,6 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
-const supabase = createClient("https://atqwdzanlfvxkzlmxtsz.supabase.co","eyJhbGci...");
+import { supabase } from "./supabase";
 const PAYMENT_URL = "https://pmny.in/xJuAmT6XgxX7";
 const TRIAL_LIMIT = 2;
 const COLORS = ["#6366f1","#0ea5e9","#10b981","#f59e0b","#ef4444","#8b5cf6","#ec4899","#14b8a6","#f97316","#84cc16"];
