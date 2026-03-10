@@ -217,6 +217,9 @@ function LandingPage({ onEnter }) {
 export default function App() {
   const [page, setPage] = useState("landing");
   const [tab, setTab] = useState("timetable");
+  const [trialCount, setTrialCount] = useState(0);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const TRIAL_LIMIT = 2;
 
   // Timetable state
   const [subjects, setSubjects] = useState([]);
@@ -260,10 +263,12 @@ export default function App() {
 
   function handleGenerate() {
     if (!subjects.length) return;
+    if (!isRegistered && trialCount >= TRIAL_LIMIT) return;
     const days = config.includeSat ? [...config.days.filter(d => d!=="Saturday"), "Saturday"] : config.days.filter(d => d!=="Saturday");
     const grid = generateTimetable(subjects, days, slots);
     setTimetable({ grid, days, slots });
     setGenerated(true);
+    if (!isRegistered) setTrialCount(c => c + 1);
   }
 
   function downloadCSV() {
@@ -437,9 +442,37 @@ export default function App() {
               </div>
             </div>
 
-            <button onClick={handleGenerate} disabled={!subjects.length} style={{ background: subjects.length ? "linear-gradient(135deg,#6366f1,#8b5cf6)" : "#334155", color:"#fff", border:"none", borderRadius:12, padding:"14px 32px", fontSize:16, fontWeight:700, cursor: subjects.length ? "pointer" : "not-allowed", marginBottom:24 }}>
-              ⚡ Generate Timetable
-            </button>
+            {/* Trial counter */}
+            {!isRegistered && (
+              <div style={{ marginBottom:16, display:"flex", alignItems:"center", gap:10 }}>
+                <div style={{ background:"rgba(99,102,241,0.1)", border:"1px solid #6366f1", borderRadius:10, padding:"8px 16px", fontSize:13, color:"#a5b4fc" }}>
+                  🎯 Free Trials: <strong>{TRIAL_LIMIT - trialCount}</strong> / {TRIAL_LIMIT} remaining
+                </div>
+                <a href={REGISTER_URL} target="_blank" rel="noreferrer" onClick={() => setIsRegistered(true)}
+                  style={{ background:"rgba(16,185,129,0.1)", border:"1px solid #10b981", borderRadius:10, padding:"8px 16px", fontSize:13, color:"#34d399", textDecoration:"none", fontWeight:600 }}>
+                  ✅ Register to Unlock Unlimited
+                </a>
+              </div>
+            )}
+
+            {/* Hard block overlay */}
+            {!isRegistered && trialCount >= TRIAL_LIMIT ? (
+              <div style={{ background:"rgba(15,12,41,0.97)", border:"2px solid #6366f1", borderRadius:16, padding:40, textAlign:"center", marginBottom:24 }}>
+                <div style={{ fontSize:48, marginBottom:12 }}>🔒</div>
+                <h3 style={{ fontWeight:800, fontSize:22, marginBottom:8, color:"#e2e8f0" }}>Trial Limit Reached</h3>
+                <p style={{ color:"#94a3b8", fontSize:14, marginBottom:8 }}>You've used both free timetable generations.</p>
+                <p style={{ color:"#94a3b8", fontSize:14, marginBottom:28 }}>Register for free to unlock unlimited timetable generation!</p>
+                <a href={REGISTER_URL} target="_blank" rel="noreferrer" onClick={() => setIsRegistered(true)}
+                  style={{ display:"inline-block", background:"linear-gradient(135deg,#6366f1,#8b5cf6)", color:"#fff", borderRadius:12, padding:"14px 40px", fontSize:16, fontWeight:700, textDecoration:"none", boxShadow:"0 0 30px rgba(99,102,241,0.4)" }}>
+                  📝 Register Free to Continue →
+                </a>
+                <p style={{ color:"#334155", fontSize:12, marginTop:16 }}>No credit card required • Takes 30 seconds</p>
+              </div>
+            ) : (
+              <button onClick={handleGenerate} disabled={!subjects.length} style={{ background: subjects.length ? "linear-gradient(135deg,#6366f1,#8b5cf6)" : "#334155", color:"#fff", border:"none", borderRadius:12, padding:"14px 32px", fontSize:16, fontWeight:700, cursor: subjects.length ? "pointer" : "not-allowed", marginBottom:24 }}>
+                ⚡ Generate Timetable {!isRegistered ? `(${TRIAL_LIMIT - trialCount} left)` : ""}
+              </button>
+            )}
 
             {/* Grid */}
             {generated && timetable && (
