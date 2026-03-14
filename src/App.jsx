@@ -1,5 +1,11 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { supabase } from "./supabase";
+import AttendanceRegister from "./AttendanceRegister.jsx";
+import { createClient } from "@supabase/supabase-js";
+
+const SUPABASE_URL = "https://atqwdzanlfvxkzlmxtsz.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0cXdkemFubGZ2eGt6bG14dHN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMDc5ODAsImV4cCI6MjA4ODY4Mzk4MH0.eVpTMbk2G-CoZmSa4YAEl5MagTQB_JlYvA5zA05OA1M";
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
 const PAYMENT_URL = "https://pmny.in/xJuAmT6XgxX7";
 const TRIAL_LIMIT = 2;
 const COLORS = ["#6366f1","#0ea5e9","#10b981","#f59e0b","#ef4444","#8b5cf6","#ec4899","#14b8a6","#f97316","#84cc16"];
@@ -649,17 +655,7 @@ export default function App(){
           </div>
         )}
 
-        {tab==="attendance"&&(
-          <div>
-            <h2 style={{fontSize:24,fontWeight:800,marginBottom:4}}>✅ Attendance</h2>
-            <div style={{background:cardBg,borderRadius:16,padding:40,border:`1px solid ${border}`,textAlign:"center",maxWidth:500,marginTop:24}}>
-              <div style={{fontSize:48,marginBottom:16}}>🚧</div>
-              <div style={{fontWeight:700,fontSize:18,marginBottom:8}}>Coming Soon</div>
-              <p style={{color:muted}}>Full attendance tracking available in Professional plan.</p>
-              <a href={PAYMENT_URL} target="_blank" rel="noreferrer" style={{display:"inline-block",marginTop:20,background:"linear-gradient(135deg,#6366f1,#8b5cf6)",color:"#fff",borderRadius:10,padding:"12px 28px",textDecoration:"none",fontWeight:700}}>Upgrade to Unlock →</a>
-            </div>
-          </div>
-        )}
+        {tab==="attendance"&&<AttendanceRegister darkMode={darkMode}/>}
       </main>
     </div>
   );
