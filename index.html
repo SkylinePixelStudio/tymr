@@ -2,12 +2,43 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#6366f1" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- iOS PWA support -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Tymr" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+
+    <!-- SEO / sharing -->
+    <meta name="description" content="Smart timetable maker and attendance register for academics" />
+    <meta name="application-name" content="Tymr" />
+    <meta property="og:title" content="Tymr — Academic Scheduler" />
+    <meta property="og:description" content="Smart timetable maker and attendance register for academics" />
+    <meta property="og:image" content="/logo.png" />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" type="image/png" href="/logo.png" />
     <title>Tymr</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Register service worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('Tymr SW registered:', reg.scope))
+            .catch(err => console.log('SW registration failed:', err));
+        });
+      }
+    </script>
   </body>
 </html>
