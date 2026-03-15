@@ -1,9 +1,9 @@
 import React, { useState, useMemo, useEffect } from "react";
-import AttendanceRegister from "./AttendanceRegister.jsx";
 import { createClient } from "@supabase/supabase-js";
-
+const supabase = createClient("https://atqwdzanlfvxkzlmxtsz.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0cXdkemFubGZ2eGt6bG14dHN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMDc5ODAsImV4cCI6MjA4ODY4Mzk4MH0.eVpTMbk2G-CoZmSa4YAEl5MagTQB_JlYvA5zA05OA1M");
+// Supabase client - works in local project with @supabase/supabase-js installed
 const SUPABASE_URL = "https://atqwdzanlfvxkzlmxtsz.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0cXdkemFubGZ2eGt6bG14dHN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMDc5ODAsImV4cCI6MjA4ODY4Mzk4MH0.eVpTMbk2G-CoZmSa4YAEl5MagTQB_JlYvA5zA05OA1M";
+const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0cXdkemFubGZ2eGt6bG14dHN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMDc5ODAsImV4cCI6MjA4ODY4Mzk4MH0.eVpTMbk2G-CoZmSa4YAEl5MagTQB_JlYvA5zA05OA1M";
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const PAYMENT_URL = "https://pmny.in/xJuAmT6XgxX7";
@@ -291,6 +291,7 @@ export default function App(){
   const [page,setPage]=useState("landing");
   const [tab,setTab]=useState("dashboard");
   const [darkMode,setDarkMode]=useState(true);
+  const [sideOpen,setSideOpen]=useState(false);
   const [user,setUser]=useState(null);
   const [profile,setProfile]=useState(null);
   const [loadingAuth,setLoadingAuth]=useState(true);
@@ -431,8 +432,16 @@ export default function App(){
 
   return(
     <div style={{fontFamily:"'Segoe UI',sans-serif",minHeight:"100vh",background:bg,color:text,display:"flex",flexWrap:"wrap"}}>
+      {/* Mobile overlay */}
+      {sideOpen&&<div onClick={()=>setSideOpen(false)} style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.55)",zIndex:40}}/>}
+      {/* Hamburger button — mobile only */}
+      <button onClick={()=>setSideOpen(s=>!s)} style={{position:"fixed",top:12,left:12,zIndex:60,background:sideBg,border:`1px solid ${border}`,borderRadius:8,width:40,height:40,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",gap:5,padding:8,boxShadow:"0 2px 8px rgba(0,0,0,0.3)"}}>
+        <span style={{width:20,height:2,background:text,borderRadius:2,transition:"all 0.3s",transform:sideOpen?"rotate(45deg) translate(5px,5px)":"none"}}/>
+        <span style={{width:20,height:2,background:text,borderRadius:2,transition:"all 0.3s",opacity:sideOpen?0:1}}/>
+        <span style={{width:20,height:2,background:text,borderRadius:2,transition:"all 0.3s",transform:sideOpen?"rotate(-45deg) translate(5px,-5px)":"none"}}/>
+      </button>
       {/* Sidebar */}
-      <aside style={{width:220,background:sideBg,borderRight:`1px solid ${border}`,padding:"24px 0",display:"flex",flexDirection:"column",flexShrink:0,minHeight:"100vh"}}>
+      <aside style={{position:"fixed",top:0,left:sideOpen?0:-240,width:220,background:sideBg,borderRight:`1px solid ${border}`,padding:"24px 0",display:"flex",flexDirection:"column",flexShrink:0,height:"100vh",zIndex:50,transition:"left 0.3s ease",overflowY:"auto"}}>
         <div onClick={()=>setPage("landing")} style={{padding:"0 20px 24px",cursor:"pointer",display:"flex",alignItems:"center",gap:10}}>
           <img src="/logo.png" alt="Tymr" style={{height:36,width:36,borderRadius:8,objectFit:"cover"}}/>
           <span style={{fontSize:20,fontWeight:800,background:"linear-gradient(90deg,#818cf8,#c084fc)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>Tymr</span>
@@ -445,7 +454,7 @@ export default function App(){
           </div>
         )}
         {navItems.map(n=>(
-          <div key={n.id} onClick={()=>setTab(n.id)} style={{padding:"12px 20px",cursor:"pointer",background:tab===n.id?(darkMode?"rgba(99,102,241,0.15)":"#eef2ff"):"transparent",borderLeft:tab===n.id?"3px solid #6366f1":"3px solid transparent",color:tab===n.id?"#818cf8":muted,fontWeight:tab===n.id?600:400}}>{n.label}</div>
+          <div key={n.id} onClick={()=>{setTab(n.id);setSideOpen(false);}} style={{padding:"12px 20px",cursor:"pointer",background:tab===n.id?(darkMode?"rgba(99,102,241,0.15)":"#eef2ff"):"transparent",borderLeft:tab===n.id?"3px solid #6366f1":"3px solid transparent",color:tab===n.id?"#818cf8":muted,fontWeight:tab===n.id?600:400}}>{n.label}</div>
         ))}
         <div style={{marginTop:"auto",padding:"16px 20px",borderTop:`1px solid ${border}`}}>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:12}}>
@@ -463,7 +472,7 @@ export default function App(){
       </aside>
 
       {/* Main */}
-      <main style={{flex:1,padding:24,overflowY:"auto",minWidth:0}}>
+      <main style={{flex:1,padding:"24px 24px 24px 68px",overflowY:"auto",minWidth:0,width:"100%"}}>
         {tab==="dashboard"&&<Dashboard profile={profile?{...profile,email:user?.email}:null} timetablesCount={profile?.timetables_count||savedTimetables.length} darkMode={darkMode} onNavigate={setTab}/>}
 
         {tab==="timetable"&&(
@@ -655,7 +664,17 @@ export default function App(){
           </div>
         )}
 
-        {tab==="attendance"&&<AttendanceRegister darkMode={darkMode}/>}
+        {tab==="attendance"&&(
+          <div>
+            <h2 style={{fontSize:24,fontWeight:800,marginBottom:4}}>✅ Attendance</h2>
+            <div style={{background:cardBg,borderRadius:16,padding:40,border:`1px solid ${border}`,textAlign:"center",maxWidth:500,marginTop:24}}>
+              <div style={{fontSize:48,marginBottom:16}}>🚧</div>
+              <div style={{fontWeight:700,fontSize:18,marginBottom:8}}>Coming Soon</div>
+              <p style={{color:muted}}>Full attendance tracking available in Professional plan.</p>
+              <a href={PAYMENT_URL} target="_blank" rel="noreferrer" style={{display:"inline-block",marginTop:20,background:"linear-gradient(135deg,#6366f1,#8b5cf6)",color:"#fff",borderRadius:10,padding:"12px 28px",textDecoration:"none",fontWeight:700}}>Upgrade to Unlock →</a>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
